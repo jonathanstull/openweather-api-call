@@ -9,7 +9,7 @@ $(document).ready(() => {
     $("#location").val("");
 
     let request = new XMLHttpRequest();
-    const url = `api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=a47d1ea44db58ad964bc5b4494638cd3`;
+    const url = `api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=${process.env.API_KEY}`;
 
     request.onreadystatechange = () => {
       if (this.readyState === 4 && this.status === 200) {
