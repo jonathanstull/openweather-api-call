@@ -11,19 +11,23 @@ function clearFields () {
   $('.showTemp').val("");
 }
 
+function getElements(response) {
+  if (response.main) {
+    $('.showHumidity').text(`The humidity in ${response.name} is ${response.main.humidity}%`);
+    $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
+    $('.showErrors').text(`There was an error: ${response}`);
+  }
+}
+
+async function makeApiCall(city) {
+  const response = await WeatherService.getWeather(city);
+  getElements(response);
+}
+
 $(document).ready(() => {
   $("#weatherLocation").click(() => {
     let city = $("#location").val();
     clearFields();
-
-    let promise = WeatherService.getWeather(city);
-    promise.then(function(response) {
-      const body = JSON.parse(response);
-      $('.showHumidity').text(`The humidity in ${city} is ${body.main.humidity}%`);
-      $('.showTemp').text(`The temperature in Kelvins is ${body.main.temp} degrees.`);
-      $('.showErrors').text("");
-    }, function(error) {
-      $('.showErrors').text(`There was an error processing your request: ${error}.`);
-    });
+    makeApiCall(city);
   });
 });
