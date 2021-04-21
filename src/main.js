@@ -2,7 +2,8 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import WeatherService from './weather-service.js';
+import WeatherService from './services/weather-service.js';
+import something from './services/giphy-service.js';
 
 function clearFields () {
   $('#location').val("");
